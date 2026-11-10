@@ -6,11 +6,8 @@ import type { UpdateTodoDto } from './dto/update-todo.dto.js';
 
 // Business logic + the in-memory store.
 // No HTTP concepts here (no Request/Response, no status codes) — except
-// NotFoundException, which is Nest's way of expressing "404" from anywhere.
 @Injectable()
 export class TodoService {
-  // Map keeps insertion order, preserves O(1) lookup by id, and is easy to
-  // reason about while learning. Swap for a real repository/DB later.
   private readonly todos = new Map<string, Todo>();
 
   getAllTodos(): Todo[] {
@@ -47,7 +44,7 @@ export class TodoService {
   }
 
   deleteTodo(id: string): void {
-    this.getTodo(id); // throws 404 if the id is unknown
+    this.getTodo(id); // throws 404 
     this.todos.delete(id);
   }
 }
